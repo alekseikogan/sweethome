@@ -1,10 +1,17 @@
 from django.contrib import admin
-from django.urls import path
-
-from main.views import index, about
+from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', index, name='index'),
-    path('about/', about, name='about'),
+    path('', include('main.urls', namespace='main')),
+    path('catalog/', include('goods.urls', namespace='catalog')),
 ]
+
+# Маршруты
+# www.site.com/admin
+
+# www.site.com
+# www.site.com/about
+
+# www.site.com/catalog
+# www.site.com/catalog/product

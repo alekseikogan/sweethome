@@ -1,9 +1,8 @@
-from django.http.response import HttpResponse
 from django.shortcuts import render
-from django.http import HttpResponse
 
 
 def index(request):
+    '''Главная страница'''
     context = {
         'title': 'Главная страница',
         'content': 'Главная страница SweetHome'
@@ -12,4 +11,10 @@ def index(request):
 
 
 def about(request):
-    return HttpResponse('about')
+    '''Про нас'''
+    context = {
+        'title': 'О нас',
+        'content': 'О нас',
+        'text_on_page': 'Текст о том какой классный этот интернет магазин.'
+    }
+    return render(request, 'main/about.html', context=context)
