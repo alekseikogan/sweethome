@@ -5,7 +5,7 @@ def catalog(request):
     '''Каталог товаров - главная'''
     context = {
         'title': 'Каталог',
-        'content': 'Каталог товаров'
+        'goods':
     }
     return render(request, 'goods/catalog.html', context=context)
 
