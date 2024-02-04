@@ -125,10 +125,13 @@
     </section>
     {% block footer %}
     {% endblock footer %}
+    <!-- ниже подключаем как джанго для бека, так jquery для фронта -->
     <script src="{% static "deps/js/jquery/jquery-3.7.0.min.js" %}"></script>
-    <script src="{% static "deps/js/jquery-events.js" %}"></script>
+    <!-- ниже подключаем самописные скрипты -->
     <script src="{% static "deps/js/jquery-ajax.js" %}"></script>
     <script src="{% static "deps/js/bootstrap/bootstrap.bundle.min.js" %}"></script>
+    <!-- ниже удалили файл, тк объединили его с ajax -->
+    {% comment %} <script src="{% static "deps/js/jquery-events.js" %}"></script> {% endcomment %}
 </body>
 
 </html>
