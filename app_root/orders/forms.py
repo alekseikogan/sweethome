@@ -2,7 +2,7 @@ import re
 from django import forms
 
 
-class CreatOrderForm(forms.Form):
+class CreateOrderForm(forms.Form):
 
     first_name = forms.CharField()
     last_name = forms.CharField()
