@@ -1,6 +1,5 @@
 from django.db import models
 from goods.models import Product
-
 from users.models import User
 
 
@@ -27,7 +26,8 @@ class Cart(models.Model):
         verbose_name='Пользователь')
 
     product = models.ForeignKey(
-        Product, on_delete=models.CASCADE,
+        Product,
+        on_delete=models.CASCADE,
         verbose_name='Продукт')
 
     quantity = models.PositiveSmallIntegerField(

@@ -5,8 +5,10 @@ from django.forms import ValidationError
 from django.shortcuts import redirect, render
 from orders.forms import CreateOrderForm
 from orders.models import Order, OrderItem
+from django.contrib.auth.decorators import login_required
 
 
+@login_required
 def create_order(request):
     '''Создание заказа'''
 
@@ -72,6 +74,7 @@ def create_order(request):
     context = {
         'title': 'Оформление заказа',
         'form': form,
+        'order': True,
     }
 
     return render(request, 'orders/create_order.html', context=context)
