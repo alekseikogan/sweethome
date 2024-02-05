@@ -2,7 +2,7 @@ from carts.models import Cart
 from django.contrib import admin
 
 
-class CartTabAdmin(admin.TabularInline):
+class CartTabularAdmin(admin.TabularInline):
     model = Cart
     fields = ('product', 'quantity', 'created_timestamp',)
     search_fields = ('product', 'quantity', 'created_timestamp',)
