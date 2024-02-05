@@ -7,7 +7,7 @@ from carts.models import Cart
 from goods.models import Product
 
 
-def cart_add(request):
+def cart_add(request) -> JsonResponse:
 
     product_id = request.POST.get('product_id')
     product = Product.objects.get(id=product_id)
