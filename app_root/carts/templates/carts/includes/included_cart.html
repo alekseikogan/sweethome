@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load carts_tags %}
 
 <div class="card mb-3 text-bg-light shadow-lg">
     {% for cart in carts %}
@@ -49,7 +49,7 @@
 </div>
 <div class="card mb-3 shadow-lg">
     <div class="card-footer">
-        <p class="float-left">Итого <strong>{{carts.total_quantity}}</strong> товар(а) на сумму</p>
+        <p class="float-left">Итого <strong>{{carts.total_quantity}}</strong> {{carts.total_quantity|ru_plural}} на сумму</p>
         <h4 class="float-left"><strong>{{carts.total_price}} $</strong></h4>
     </div>
 </div>
