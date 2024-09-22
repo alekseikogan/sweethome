@@ -26,6 +26,7 @@ $(document).ready(function () {
                 product_id: product_id,
                 csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
             },
+            // Словарь data будет возвращен с Backendа
             success: function (data) {
                 // Сообщение
                 successMessage.html(data.message);
