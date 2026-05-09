@@ -28,7 +28,8 @@ services:
       DJANGO_CSRF_COOKIE_SECURE: "True"
     volumes:
       - static_data:/app/app_root/staticfiles
-      - media_data:/app/app_root/media
+      # Host folder so uploads on the server (app_root/media) match what Nginx serves
+      - ./app_root/media:/app/app_root/media
     command: ["/app/docker-entrypoint-prod.sh"]
     depends_on:
       db:
@@ -46,7 +47,7 @@ services:
       - "443:443"
     volumes:
       - static_data:/var/www/static
-      - media_data:/var/www/media
+      - ./app_root/media:/var/www/media
       - certbot_etc:/etc/letsencrypt
       - certbot_webroot:/var/www/certbot
     depends_on:
@@ -61,6 +62,5 @@ services:
 volumes:
   postgres_data:
   static_data:
-  media_data:
   certbot_etc:
   certbot_webroot:

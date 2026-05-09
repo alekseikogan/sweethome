@@ -46,7 +46,9 @@ PostgreSQL поднимется в отдельном контейнере, а D
 
 До выпуска Let's Encrypt сертификата Nginx стартует с self-signed сертификатом, чтобы HTTPS уже работал.
 
-Если на продакшене не отображаются фото товаров: в Docker при первом запуске том `media` пустой, а в базе остаются только пути к файлам. Команда `seed_demo_media` (вызывается из `docker-entrypoint-prod.sh` перед `collectstatic`) создает placeholder-изображения для демо-данных. После обновления кода выполните `docker compose -f docker-compose.prod.yml up -d --build`.
+В `docker-compose.prod.yml` каталог **`app_root/media` на сервере** смонтирован в контейнеры `web` и `nginx`. Файлы, которые ты кладёшь на хосте в `~/Dev/sweethome/app_root/media/...`, и есть то, что отдаётся по `/media/...`. Раньше использовался отдельный Docker-том `media_data`, из‑за этого папка на диске и то, что видели контейнеры, расходились.
+
+Дополнительно при старте вызывается `seed_demo_media`: если файлов нет, создаются заглушки. После смены compose выполни `docker compose -f docker-compose.prod.yml up -d`.
 
 
 ## Полезные команды:
