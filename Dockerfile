@@ -14,9 +14,10 @@ RUN pip install --no-cache-dir -r /app/requirements.txt
 
 COPY app_root /app/app_root
 COPY docker-entrypoint.sh /app/docker-entrypoint.sh
+COPY docker-entrypoint-prod.sh /app/docker-entrypoint-prod.sh
 
-RUN sed -i 's/\r$//' /app/docker-entrypoint.sh && chmod +x /app/docker-entrypoint.sh
+RUN sed -i 's/\r$//' /app/docker-entrypoint.sh \
+    && sed -i 's/\r$//' /app/docker-entrypoint-prod.sh \
+    && chmod +x /app/docker-entrypoint.sh /app/docker-entrypoint-prod.sh
 
 WORKDIR /app/app_root
-
-ENTRYPOINT ["/app/docker-entrypoint.sh"]

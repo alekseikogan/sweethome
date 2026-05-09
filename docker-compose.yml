@@ -30,6 +30,7 @@ services:
       - "8000:8000"
     volumes:
       - ./app_root:/app/app_root
+    command: ["/app/docker-entrypoint.sh"]
     depends_on:
       db:
         condition: service_healthy

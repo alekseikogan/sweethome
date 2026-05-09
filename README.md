@@ -26,6 +26,26 @@ SweetHome - сайт, созданный на основе Python и фрейм�
 
 PostgreSQL поднимется в отдельном контейнере, а Django автоматически выполнит миграции при старте `web` сервиса.
 
+## Production (Nginx + Gunicorn + HTTPS)
+
+1. Заполните `.env` для продакшена:
+   - `DJANGO_DEBUG=False`
+   - `DJANGO_ALLOWED_HOSTS=your-domain.com,www.your-domain.com`
+   - `DJANGO_CSRF_TRUSTED_ORIGINS=https://your-domain.com,https://www.your-domain.com`
+   - `DOMAIN=your-domain.com`
+   - `LETSENCRYPT_EMAIL=you@example.com`
+2. Запустите production stack:
+   - `docker compose -f docker-compose.prod.yml up -d --build`
+3. Выпустите сертификат Let's Encrypt (первый раз):
+   - `docker compose -f docker-compose.prod.yml run --rm certbot certonly --webroot -w /var/www/certbot -d your-domain.com -m you@example.com --agree-tos --no-eff-email`
+4. Перезапустите Nginx после выпуска сертификата:
+   - `docker compose -f docker-compose.prod.yml restart nginx`
+5. Продление сертификата (периодически, например cron раз в день):
+   - `docker compose -f docker-compose.prod.yml run --rm certbot renew --webroot -w /var/www/certbot --quiet`
+   - `docker compose -f docker-compose.prod.yml restart nginx`
+
+До выпуска Let's Encrypt сертификата Nginx стартует с self-signed сертификатом, чтобы HTTPS уже работал.
+
 
 ## Полезные команды:
 `python manage.py loaddata fixtures/goods/categories.json`
