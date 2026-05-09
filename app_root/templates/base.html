@@ -32,6 +32,18 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Каталог
+                                <img class="mx-1" src="{% static "deps/icons/grid-fill.svg" %}" alt="Catalog Icon" width="16" height="16">
+                            </a>
+                            <ul class="dropdown-menu">
+                                {% tag_categories as categories %}
+                                {% for cat in categories %}
+                                    <li><a class="dropdown-item" href="{% url 'catalog:index' cat.slug %}">{{cat.name}}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </li>
                         <li class="nav-item dropdown ">
                             <a class="nav-link dropdown-toggle text-white" href="#" role="button"
                                 data-bs-toggle="dropdown" aria-expanded="false">
@@ -72,10 +84,12 @@
                     </ul>
 
                     <!-- Форма поиска -->
-                    <form class="d-flex gap-2" role="search" action='{% url 'catalog:search' %}' method='get'>
+                    <form class="d-flex gap-2 me-2" role="search" action='{% url 'catalog:search' %}' method='get'>
                         <input class="form-control" type="search" name='q' placeholder="Найти товары..." aria-label="Введите текст">
                         <button class="btn btn-outline-light" type="submit">Поиск</button>
                     </form>
+                    {% block modal_cart %}
+                    {% endblock %}
 
                 </div>
             </div>
@@ -83,25 +97,6 @@
     </header>
 
     <section class="app-shell">
-        <div class="container mb-3">
-            <div class="glass-panel p-3 d-flex flex-wrap align-items-center justify-content-between gap-2">
-                <div class="dropdown">
-                    <button class="btn btn-dark dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Каталог
-                        <img class="mx-1" src="{% static "deps/icons/grid-fill.svg" %}" alt="Catalog Icon" width="16" height="16">
-                    </button>
-                    <ul class="dropdown-menu">
-                        {% tag_categories as categories %}
-                        {% for cat in categories %}
-                            <li><a class="dropdown-item" href="{% url 'catalog:index' cat.slug %}">{{cat.name}}</a></li>
-                        {% endfor %}
-                    </ul>
-                </div>
-                {% block modal_cart %}
-                {% endblock %}
-            </div>
-        </div>
-
         <div class="container">
             <div class="row">
                 <div class="col-12">
