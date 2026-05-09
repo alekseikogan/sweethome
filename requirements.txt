@@ -1,26 +1,41 @@
-asgiref==3.7.2
-autopep8==2.0.2
-charset-normalizer==3.1.0
+# Core Django
 Django==4.2.7
-django-debug-toolbar==4.3.0
-django-templated-mail==1.1.1
-flake8==6.0.0
-idna==3.4
-itypes==1.2.0
-mccabe==0.7.0
-pillow==10.2.0
-psycopg==3.1.17
-psycopg-binary==3.1.17
-pycodestyle==2.10.0
-pyflakes==3.0.1
-Pygments==2.15.1
-python-dotenv==1.0.0
-pytz==2023.2
-PyYAML==6.0
-smmap==5.0.0
-snowballstemmer==2.2.0
-sqlparse==0.4.3
-typing_extensions==4.9.0
-tzdata==2023.4
-uritemplate==4.1.1
-urllib3==1.26.15
+sqlparse>=0.4.3
+asgiref>=3.7.2
+pytz>=2023.2
+tzdata>=2023.4
+
+# PostgreSQL driver (modern)
+psycopg[binary]>=3.3,<4.0
+
+# Environment variables
+python-dotenv>=1.0.0
+
+# Images
+Pillow>=10.2
+
+# API / schema tools (если используешь DRF / OpenAPI)
+uritemplate>=4.1.1
+PyYAML>=6.0
+itypes>=1.2.0
+
+# Debug
+django-debug-toolbar>=4.3.0
+
+# Mail (если используешь Django email templates)
+django-templated-mail>=1.1.1
+
+# HTTP / networking (если реально используется)
+urllib3>=1.26.15
+idna>=3.4
+charset-normalizer>=3.1.0
+
+# Dev tools (optional, можно вынести в dev-requirements.txt)
+flake8>=6.0.0
+pyflakes>=3.0.1
+pycodestyle>=2.10.0
+mccabe>=0.7.0
+autopep8>=2.0.2
+Pygments>=2.15.1
+snowballstemmer>=2.2.0
+smmap>=5.0.0

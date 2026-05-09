@@ -1,0 +1,16 @@
+.git
+.idea
+.vscode
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache
+.mypy_cache
+.venv
+venv
+env
+ENV
+app_root/**/__pycache__
+app_root/media
+app_root/staticfiles
