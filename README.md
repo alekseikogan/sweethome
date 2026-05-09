@@ -46,6 +46,8 @@ PostgreSQL поднимется в отдельном контейнере, а D
 
 До выпуска Let's Encrypt сертификата Nginx стартует с self-signed сертификатом, чтобы HTTPS уже работал.
 
+Если на продакшене не отображаются фото товаров: в Docker при первом запуске том `media` пустой, а в базе остаются только пути к файлам. Команда `seed_demo_media` (вызывается из `docker-entrypoint-prod.sh` перед `collectstatic`) создает placeholder-изображения для демо-данных. После обновления кода выполните `docker compose -f docker-compose.prod.yml up -d --build`.
+
 
 ## Полезные команды:
 `python manage.py loaddata fixtures/goods/categories.json`

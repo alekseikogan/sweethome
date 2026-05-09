@@ -9,6 +9,9 @@ done
 echo "Applying migrations..."
 python manage.py migrate --noinput
 
+echo "Ensuring demo media placeholders (if volume is empty)..."
+python manage.py seed_demo_media
+
 echo "Collecting static files..."
 python manage.py collectstatic --noinput
 
