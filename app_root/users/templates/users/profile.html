@@ -3,12 +3,9 @@
 {% load carts_tags %}
 
 {% block content %}
-<div class="row">
-    <div class="container mt-5">
-        <div class="row">
-            <!-- Профиль с данными пользователя -->
-            <div class="col-md-5">
-                <div class=" bg-white p-4 mb-4 mx-2 rounded custom-shadow">
+<div class="row g-4">
+    <div class="col-lg-5">
+        <div class="form-surface p-4 h-100">
                     <h3 class="text-center mb-4">Профиль пользователя</h3>
 
                     <form action='{% url "users:profile" %}' method="post" enctype='multipart/form-data'>
@@ -94,26 +91,21 @@
                         </div>
                         <button type="submit" class="btn btn-dark">Сохранить</button>
                     </form>
-                </div>
-            </div>
-            <!-- Корзина -->
+        </div>
+    </div>
 {% user_carts request as carts %}
-            <div class="col-md-7">
-                <div class=" bg-white p-4 mb-4 mx-2 rounded custom-shadow">
+    <div class="col-lg-7">
+        <div class="form-surface p-4 h-100">
                     <h3 class="text-center mb-4">Корзина</h3>
                     <div class="container" id="cart-items-container">
-                        <!-- Разметка корзины -->
                         {% include "carts/includes/included_cart.html" %}
-                        <!-- Закончилась разметка корзины -->
                     </div>
-                </div>
-            </div>
-            <!-- Оформленные заказы -->
-            <div class="col-md-12">
-                <div class=" bg-white p-4 mb-4 mx-2 rounded custom-shadow">
-                    <h3 class="text-center mb-4">Мои заказы</h3>
-                    <!-- Разметка заказов -->
-                    <div class="container">
+        </div>
+    </div>
+    <div class="col-12">
+        <div class="form-surface p-4">
+            <h3 class="text-center mb-4">Мои заказы</h3>
+            <div class="container">
                         <div class="accordion" id="accordionExample">
                             {% for order in orders %}
                                 <div class="accordion-item">
@@ -125,7 +117,7 @@
                                     </h2>
                                     <div id="collapse{{ order.id }}" class="accordion-collapse collapse {% if order == orders.0 %}show{% endif %}" aria-labelledby="heading{{ order.id }}" data-bs-parent="#accordionExample">
                                         <div class="accordion-body">
-                                            <table class="table table-dark table-hover">
+                                            <table class="table table-striped align-middle">
                                                 <thead>
                                                     <tr>
                                                         <th>Товар</th>
@@ -137,7 +129,7 @@
                                                 <tbody>
                                                     {% for item in order.orderitem_set.all %}
                                                     <tr>
-                                                        <td><a class="text-white" href="{{item.product.get_absolute_url}}">{{item.product.name}}</a></td>
+                                                        <td><a href="{{item.product.get_absolute_url}}">{{item.product.name}}</a></td>
                                                         <td>{{item.quantity}}</td>
                                                         <td>{{item.price}} $</td>
                                                         <td>{{item.product_price}} $</td>
@@ -148,7 +140,7 @@
                                             </table>
                                             <div class="d-flex justify-content-between">
                                                 <p><strong>Итого:</strong></p>
-                                                <p><strong>255.00 $</strong></p>
+                                                <p><strong>{{ order.orderitem_set.total_price }} $</strong></p>
 
                                             </div>
                                         </div>
@@ -156,11 +148,8 @@
                                 </div>
                             {% endfor %}
                         </div>
-                    </div>
-                    <!-- Закончилась разметка заказов -->
-                </div>
             </div>
         </div>
-    </div>
+    </div>    
 </div>
 {% endblock content %}

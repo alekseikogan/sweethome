@@ -10,45 +10,50 @@
 {% endblock modal_cart %}
 
 {% block content %}
-    <div class="container mt-5">
-        <div class="card mb-4 custom-shadow">
-            <div class="row">
-                <!-- Миниатюры -->
-                <div class="col-md-4">
-                    <img src="{{product.image.url}}"
-                        class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#imageModal1">
-                </div>
-                <div class="col-md-4 ">
-                    <p class="product_id mt-3">id: {{ product.display_id }}</p>
-                </div>
-                <!-- Увеличить изображение в модальном окне -->
-                <div class="modal fade" id="imageModal1" tabindex="-1"
-                    aria-labelledby="imageModal1Label" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="imageModal1Label">{{ product.name }}</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                    aria-label="Закрыть"></button>
-                            </div>
-                            <div class="modal-body">
-                                <img src="{{ product.image.url }}"
-                                    class="img-fluid" alt="{{ product.name }}">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="content-card p-4 p-lg-5">
+        <div class="row g-4 align-items-start">
+            <div class="col-lg-6">
+                {% if product.image %}
+                    <img src="{{product.image.url}}" class="img-fluid rounded-4 border"
+                        alt="{{ product.name }}" data-bs-toggle="modal" data-bs-target="#imageModal1" style="cursor: zoom-in;">
+                {% else %}
+                    <img src="{% static 'deps/images/Not found image.png' %}" class="img-fluid rounded-4 border"
+                        alt="{{ product.name }}">
+                {% endif %}
             </div>
-            <!-- Описание товара -->
-            <div class="card-body">
-                <p class="card-text">Цена: <strong>{{ product.sell_price }} $</strong></p>
-                <h5 class="card-title">{{ product.name }}</h5>
-                <p class="card-text">{{ product.description }}</p>
-                <a href="{% url "carts:cart_add" %}" class="btn btn-dark add-to-cart" 
-                    data-product-id="{{ product.id }}">
+            <div class="col-lg-6">
+                <p class="product-meta mb-2">Артикул: {{ product.display_id }}</p>
+                <h1 class="h3 mb-3">{{ product.name }}</h1>
+                <p class="text-secondary">{{ product.description }}</p>
+                <div class="d-flex align-items-center gap-3 mb-4">
+                    {% if product.discount %}
+                        <span class="discount-badge">Скидка {{ product.discount }}%</span>
+                        <p class="price-old m-0"><s>{{ product.price }} $</s></p>
+                    {% endif %}
+                    <p class="price-current h4 m-0">{{ product.sell_price }} $</p>
+                </div>
+                <a href="{% url "carts:cart_add" %}" class="btn btn-dark add-to-cart" data-product-id="{{ product.id }}">
                     {% csrf_token %}
                     Добавить в корзину
                 </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="imageModal1" tabindex="-1" aria-labelledby="imageModal1Label" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="imageModal1Label">{{ product.name }}</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+                </div>
+                <div class="modal-body">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" class="img-fluid" alt="{{ product.name }}">
+                    {% else %}
+                        <img src="{% static 'deps/images/Not found image.png' %}" class="img-fluid" alt="{{ product.name }}">
+                    {% endif %}
+                </div>
             </div>
         </div>
     </div>

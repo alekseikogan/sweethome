@@ -1,40 +1,37 @@
 {% load static %}
 {% load carts_tags %}
 
-<div class="card mb-3 text-bg-light shadow-lg">
+<div class="card border-0 shadow-sm mb-3 cart-wrapper">
     {% for cart in carts %}
-        <div class="card-header">
-            <h5 class="card-title">{{cart.product.name}}</h5>
+        <div class="card-header bg-white border-0 pt-3 pb-2">
+            <h5 class="card-title mb-0">{{cart.product.name}}</h5>
         </div>
         <ul class="list-group list-group-flush">
-            <li class="list-group-item">
-                <div class="row text-center">
-                    <div class="col p-0">
-                        <div class="input-group">
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-dark btn-sm decrement"
+            <li class="list-group-item cart-item-row">
+                <div class="row align-items-center text-center g-2">
+                    <div class="col-md-5 col-12">
+                        <div class="input-group cart-qty-group">
+                            <button type="button" class="btn btn-outline-dark btn-sm decrement"
                                     data-cart-id="{{cart.id}}"
                                     data-cart-change-url="{% url "carts:cart_change" %}">
-                                    {% csrf_token %}
-                                    -</button>
-                            </span>
-                            <input type="text" class="form-control number" value="{{cart.quantity}}"
-                                readonly>
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-dark btn-sm increment"
+                                {% csrf_token %}
+                                -
+                            </button>
+                            <input type="text" class="form-control number cart-qty-input" value="{{cart.quantity}}" readonly>
+                            <button type="button" class="btn btn-outline-dark btn-sm increment"
                                     data-cart-id="{{cart.id}}"
                                     data-cart-change-url="{% url "carts:cart_change" %}">
-                                    {% csrf_token %}
-                                    +</button>
-                            </span>
+                                {% csrf_token %}
+                                +
+                            </button>
                         </div>
                     </div>
-                    <div class="col p-0">
-                        <p>x {{ cart.product.sell_price }} = </p>
+                    <div class="col-md-3 col-6">
+                        <p class="mb-0 text-secondary">x {{ cart.product.sell_price }} $</p>
                     </div>
-                    <div class="col p-0"><strong>{{cart.products_price}} $</strong></div>
-                    <div class="col p-0">
-                        <a href="{% url "carts:cart_remove" %}" class="remove-from-cart"
+                    <div class="col-md-3 col-4"><strong>{{cart.products_price}} $</strong></div>
+                    <div class="col-md-1 col-2">
+                        <a href="{% url "carts:cart_remove" %}" class="remove-from-cart cart-remove-btn"
                         data-cart-id="{{cart.id}}">
                         {% csrf_token %}
                             <img class="mx-1" src="{% static "deps/icons/trash3-fill.svg" %}"
@@ -47,15 +44,15 @@
     {% endfor %}
 
 </div>
-<div class="card mb-3 shadow-lg">
-    <div class="card-footer">
-        <p class="float-left">Итого <strong>{{carts.total_quantity}}</strong> {{carts.total_quantity|ru_plural}} на сумму</p>
-        <h4 class="float-left"><strong>{{carts.total_price}} $</strong></h4>
+<div class="card border-0 shadow-sm mb-3">
+    <div class="card-footer bg-white border-0 py-3">
+        <p class="mb-1 text-secondary">Итого <strong>{{carts.total_quantity}}</strong> {{carts.total_quantity|ru_plural}} на сумму</p>
+        <h4 class="mb-0"><strong>{{carts.total_price}} $</strong></h4>
     </div>
 </div>
 
 {% if carts and not order %}
-    <a class="btn btn-dark" href="{% url "orders:create_order" %}">
+    <a class="btn btn-dark w-100" href="{% url "orders:create_order" %}">
         Оформить заказ
     </a>
 {% endif %}

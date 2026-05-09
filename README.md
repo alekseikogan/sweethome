@@ -26,5 +26,10 @@ SweetHome - сайт, созданный на основе Python и фрейм�
 
 PostgreSQL поднимется в отдельном контейнере, а Django автоматически выполнит миграции при старте `web` сервиса.
 
-python manage.py loaddata fixtures/goods/categories.json
-python manage.py loaddata fixtures/goods/products.json
+
+## Полезные команды:
+`python manage.py loaddata fixtures/goods/categories.json`
+
+`python manage.py loaddata fixtures/goods/products.json`
+
+` `

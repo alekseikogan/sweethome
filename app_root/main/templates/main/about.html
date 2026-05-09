@@ -15,9 +15,33 @@
 {% endblock modal_cart %}
 
 {% block content %}
-<div class="my-5 pt-3 px-2 pb-2 bg-white custom-shadow rounded">
-    <h2 class="m-2"><strong>{{ content }}</strong></h2>
-    <p class="m-2" style="font-size: 1.2rem;">{{ text_on_page}}</p>
+<div class="content-card p-4 p-lg-5">
+    <h2 class="mb-3">{{ content }}</h2>
+    <p class="mb-3 fs-5 text-secondary">{{ text_on_page}}</p>
+    <p class="mb-3 text-secondary">
+        Мы подбираем ассортимент так, чтобы можно было собрать интерьер под ключ: от функциональной мебели до финальных акцентов в декоре.
+        Наша команда следит за качеством поставщиков и старается держать честные цены без скрытых условий.
+    </p>
+    <div class="row g-3 mt-1">
+        <div class="col-md-4">
+            <div class="border rounded-3 p-3 h-100">
+                <h5>Подбор решений</h5>
+                <p class="mb-0 text-secondary">Готовые коллекции для кухни, спальни, гостиной и офиса.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="border rounded-3 p-3 h-100">
+                <h5>Быстрая логистика</h5>
+                <p class="mb-0 text-secondary">Оперативная обработка заказов и уведомления по статусам.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="border rounded-3 p-3 h-100">
+                <h5>Поддержка клиентов</h5>
+                <p class="mb-0 text-secondary">Помогаем выбрать товар и решаем вопросы после покупки.</p>
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock content %}
 

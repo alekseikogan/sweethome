@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{%block css %}
+    <link rel="stylesheet" href="{% static "deps/css/my_footer_css.css" %}">
+{% endblock css %}
+
+{% block modal_cart %}
+    {% include "includes/cart_button.html" %}
+{% endblock modal_cart %}
+
+{% block content %}
+<div class="content-card p-4 p-lg-5">
+    <h2 class="mb-4">Доставка и оплата</h2>
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <div class="border rounded-3 p-4 h-100">
+                <h5 class="mb-3">Доставка</h5>
+                <ul class="mb-0 text-secondary">
+                    <li>Курьерская доставка по городу - в течение 1-2 дней.</li>
+                    <li>Доставка по России транспортной компанией - от 3 до 7 дней.</li>
+                    <li>Самовывоз из пункта выдачи - бесплатно.</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="border rounded-3 p-4 h-100">
+                <h5 class="mb-3">Оплата</h5>
+                <ul class="mb-0 text-secondary">
+                    <li>Онлайн-оплата банковской картой на сайте.</li>
+                    <li>Оплата при получении (наличными или картой).</li>
+                    <li>Безналичный расчет для юридических лиц.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="alert alert-light border mt-4 mb-0">
+        После оформления заказа менеджер свяжется с вами для подтверждения деталей и удобного времени доставки.
+    </div>
+</div>
+{% endblock content %}
+
+{% block footer %}
+    <footer class="py-4 bg-dark">
+        <div class="container">
+            <p class="m-0 text-center text-white">Copyright &copy; SweetHome {{year}}</p>
+        </div>
+    </footer>
+{% endblock footer %}
